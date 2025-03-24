@@ -119,7 +119,7 @@ The `inputs/example_sentences.txt` file contains example use cases, questions, a
 
 ## 📸 Screenshots
 
-(Add screenshots here showing: model training output, MLflow logs, prediction results)
+
 
 ---
 
