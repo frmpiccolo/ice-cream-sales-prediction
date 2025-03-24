@@ -1,0 +1,8 @@
+scikit-learn
+pandas
+numpy
+matplotlib
+mlflow
+azureml-core
+azureml-sdk
+joblib

@@ -1,0 +1,3 @@
+- Predict sales for 35°C
+- How much will I sell at 28°C?
+- At 22 degrees, what is the expected number of ice creams sold?
