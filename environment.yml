@@ -1,0 +1,15 @@
+name: icecream-env
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+      - scikit-learn
+      - pandas
+      - numpy
+      - matplotlib
+      - joblib
+      - mlflow
+      - azureml-core
+      - azureml-sdk
+channels:
+  - defaults
