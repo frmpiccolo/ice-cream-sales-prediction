@@ -119,7 +119,25 @@ The `inputs/example_sentences.txt` file contains example use cases, questions, a
 
 ## 📸 Screenshots
 
-...
+Here are some key screenshots that illustrate the project flow and outputs:
+
+- 📂 Dataset registered in Azure ML Studio  
+  ![Screenshot 1](screenshots/screenshot01.png)
+
+- ⚙️ Training script executed in Azure ML Notebook  
+  ![Screenshot 2](screenshots/screenshot02.png)
+
+- ✅ Successful training and model output  
+  ![Screenshot 3](screenshots/screenshot03.png)
+
+- 📈 MLflow experiment run with model artifacts  
+  ![Screenshot 4](screenshots/screenshot04.png)
+
+- 🧠 Registered model in Azure ML Studio  
+  ![Screenshot 5](screenshots/screenshot05.png)
+
+- 🔮 Prediction result using trained model  
+  ![Screenshot 6](screenshots/screenshot06.png)
 
 ---
 
