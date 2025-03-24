@@ -119,7 +119,162 @@ The `inputs/example_sentences.txt` file contains example use cases, questions, a
 
 ## 📸 Screenshots
 
+...
 
+---
+
+## ⚙️ Step-by-Step Guide to Using Azure ML Studio
+
+This section provides detailed steps to set up your Azure ML Workspace, upload data, train your model in the cloud, and optionally run the model locally with or without Azure.
+
+---
+
+### 🔵 Option A: Using Azure ML Studio (Cloud-Based)
+
+> Ideal for running everything in the cloud, including data storage, training, logging, and deployment.
+
+---
+
+#### 1. Create Azure Resources
+
+1. Log in to [Azure Portal](https://portal.azure.com/)
+2. Create a new **Machine Learning workspace**
+   - Subscription: Your Azure subscription
+   - Resource group: Create new or use existing
+   - Workspace name: `icecream-ml-ws`
+   - Region: Choose closest to you (e.g., East US, Brazil South)
+3. Wait for the workspace to be created
+
+---
+
+#### 2. Launch Azure ML Studio
+
+1. Go to [ml.azure.com](https://ml.azure.com/)
+2. Select your subscription and the workspace created above
+3. You’ll be taken to Azure ML Studio
+
+---
+
+#### 3. Create Compute Resources
+
+- **Compute Instance** (for notebooks and development):
+  - Name: `icecream-compute`
+  - VM Size: `Standard_DS11_v2` or smaller for testing
+- **Compute Cluster** (optional for scaling training jobs):
+  - Minimum nodes: 0
+  - Maximum nodes: 2+
+
+---
+
+#### 4. Upload Your Dataset
+
+1. Go to `Assets > Data`
+2. Click `+ Create > From local files`
+3. Name: `ice_cream_sales`
+4. Type: Tabular
+5. Upload `ice_cream_sales.csv` from the `data/` folder
+6. Confirm and register the dataset
+
+---
+
+#### 5. Create a Custom Environment
+
+1. Go to `Assets > Environments`
+2. Create a new environment:
+   - Name: `icecream-env`
+   - Base: Python 3.8
+   - Add required packages manually or upload `requirements.txt`
+   - Enable MLflow support if available
+
+---
+
+#### 6. Create and Run Training Script
+
+1. Upload `train.py` to `Notebooks` or use Git integration
+2. Open a new notebook (or script job)
+3. Submit a training job using the script:
+   - Input: `ice_cream_sales` dataset
+   - Environment: `icecream-env`
+   - Compute: `icecream-compute` or cluster
+
+---
+
+#### 7. View Results and Registered Models
+
+- Go to `Experiments` to see metrics and logs from MLflow
+- Go to `Models` to view registered versions
+- Optional: Deploy model as real-time endpoint (AKS/ACI)
+
+---
+
+### 🟢 Option B: Run Locally (With or Without Azure ML)
+
+> You can test your model locally and optionally log to Azure ML using SDK. Or run completely disconnected from Azure.
+
+---
+
+#### 1. Setup Local Python Environment
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # or .venv\Scripts\activate on Windows
+pip install -r requirements.txt
+```
+
+#### 2. Run Training Locally
+
+```bash
+python src/train.py
+```
+
+This will:
+- Load `data/ice_cream_sales.csv`
+- Train the model locally
+- Save it to `outputs/model.joblib`
+
+If MLflow is configured locally, it will also log your run.
+
+---
+
+#### 3. Optional: Connect to Azure from Local Script
+
+- Save `aml_config.json` in `azure/`
+- Add the following to `train.py` before submitting:
+
+```python
+from azureml.core import Workspace
+ws = Workspace.from_config(path="azure/aml_config.json")
+```
+
+You can now submit experiments or register models using `ws`.
+
+---
+
+#### 4. Run Predictions Locally
+
+```bash
+python src/predict.py --temperature 30
+```
+
+---
+
+### ✅ Summary
+
+| Feature             | Azure ML Studio | Local |
+|---------------------|-----------------|-------|
+| Training            | ✅              | ✅    |
+| Logging w/ MLflow   | ✅              | ✅    |
+| Data Registration   | ✅              | ❌    |
+| Model Deployment    | ✅              | ❌    |
+| Prediction          | ✅              | ✅    |
+
+> **Tip**: Start locally, then migrate to the cloud for full MLOps workflows.
+
+---
+
+## 📬 Contact
+
+Created by [Fermin Piccolo](https://www.linkedin.com/in/ferminpiccolo)
 
 ---
 
@@ -130,15 +285,3 @@ The `inputs/example_sentences.txt` file contains example use cases, questions, a
 Free-tier resources are available but limited. Use [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/) to estimate potential costs.
 
 ---
-
-## 🚀 Future Enhancements
-
-- Add forecast using weather API
-- Use time-series forecasting models
-- Create a dashboard for sales visualization
-
----
-
-## 📬 Contact
-
-Created by [Fermin Piccolo](https://www.linkedin.com/in/ferminpiccolo)
